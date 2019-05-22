@@ -1,21 +1,7 @@
-//https://swapi.co/api/people/1
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-class SwapiService {
-  async getResource(url) {
-    const res = await fetch(url);
-    return await res.json();
-  }
+import App from './app/containers/App';
 
-  getAllPeople() {
-    return this.getResource('https://swapi.co/api/people/');
-  }
+ReactDOM.render(<App/>, document.getElementById('root'));
 
-  getPerson(id) {
-    return this.getResource(`https://swapi.co/api/people/${id}`)
-  }
-}
-
-const swapi = new SwapiService();
-swapi.getPerson(3).then((body) => {
-  console.log(body)
-});
