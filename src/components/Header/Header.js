@@ -5,12 +5,12 @@ import './style.scss';
 export default class Header extends React.Component {
 	render() {
     return(
-      <div calssName='sw-header'>
+      <div className='sw-header'>
         <div className='sw-header-container'>
           <div className='sw-header-wrap'>
             <div className='sw-header-grid'>
               <div className='sw-header-grid-col'>
-                <span calssName='sw-header-logo'>Star DB</span>
+                <span className='sw-header-logo'>Star DB</span>
               </div>
               <div className='sw-header-grid-col'>
                 <div className='sw-header-nav'>
