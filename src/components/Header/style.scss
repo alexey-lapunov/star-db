@@ -1,0 +1,48 @@
+@import '../App/variables';
+
+.sw-header {
+  &__container {
+    padding: 0 20px;
+  }
+
+  &__wrap {
+    padding: 20px 0;
+  }
+
+  &-grid {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__col {
+      &.-right {
+        margin: 0 0 0 50px;
+      }
+    }
+  }
+
+  &__logo {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  &-nav {
+    display: flex;
+
+    &__item {
+      &:not(:first-of-type) {
+        margin: 0 0 0 20px;
+      }
+    }
+
+    &__link {
+      font-size: 18px;
+      text-decoration: none;
+      color: $color-secondary;
+
+      &:hover {
+        color: rgba($color-base, .5);
+      }
+    }
+  }
+}
