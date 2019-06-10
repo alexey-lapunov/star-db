@@ -24,11 +24,13 @@ export default class Server {
   async getAllPlanets() {
     const res = await this.getResourse('/planets/');
 
-    return res.results;
+    return res.results.map( (item) => { return this._transformPlanet(item) });
   }
 
-  getPlanet(id) {
-    return this.getResourse(`/planets/${id}`);
+  async getPlanet(id) {
+    const res = await this.getResourse(`/planets/${id}`);
+
+    return this._transformPlanet(res);
   }
 
   async getAllStarships() {
@@ -40,4 +42,23 @@ export default class Server {
   getStarships(id) {
     return this.getResourse(`/starships/${id}`);
   }
+
+  _transformPlanet(planet) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    const id = planet.url.match(idRegExp)[1];
+
+    return {
+        id: id,
+        name: planet.name,
+        population: planet.population,
+        rotationPeriod: planet.rotation_period,
+        diameter: planet.diameter,
+      }
+  }
 }       
+
+// const server = new Server();
+
+// server.getAllPlanets().then((res) => {
+//   console.log(res)
+// })

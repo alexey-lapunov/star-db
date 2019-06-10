@@ -1,20 +1,19 @@
 import React from 'react';
 import Server from './../../server/';
+import ErrorMessage from './../ErroMessage/';
 
 import './style.scss';
 
 export default class RandomPlanet extends React.Component {
   state = {
-    id: 3,
-    name: null,
-    population: null,
-    rotationPeriod: null,
-    diameter: null,
+    planet: {},
+    loading: true,
+    error: false
   }
 
   constructor() {
     super();
-    this.intervalPlanet();
+    this.updatePlanet();
   }
 
   server = new Server();
@@ -24,47 +23,86 @@ export default class RandomPlanet extends React.Component {
 
     this.server
       .getPlanet(id)
-      .then((planet) => {
+      .then( (planet) => {
         this.setState({
-          name: planet.name,
-          id: id,
-          population: planet.population,
-          rotationPeriod: planet.rotation_period,
-          diameter: planet.diameter,
+          planet: planet,
+          loading: false,
         })
-      }) 
+      })
+      .catch(this.onErrorMessage)
   }
 
-  intervalPlanet() {
-    setInterval( () => {this.updatePlanet()}, 3000);
+  onErrorMessage = (err) => {
+    this.setState({ 
+        error: true,
+        loading: false,
+      }
+    )
   }
 
   render() {
-    const { id, name, population, rotationPeriod, diameter } = this.state;
+    const { planet: {
+      id, 
+      name, 
+      population, 
+      rotationPeriod, 
+      diameter
+    }, 
+      loading,
+      error
+    } = this.state;
+
+    const showLoad = () => {
+      return(
+        <div className='sw-rand-planet__loader'>
+          <div className='sw-rand-planet__spiner'></div>
+        </div>
+      )
+    };
+
+    const showError = () => {
+      return(
+        <ErrorMessage/>
+      )
+    }
+
+    const showContent = () => {
+      return(
+        <React.Fragment>
+          <img className='sw-rand-planet__img' src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt=""/>
+          <div className='sw-rand-planet__info'>
+            <h3 className='sw-rand-planet__title'>{name}</h3>
+              <ul className='sw-rand-planet-list'>
+                <li className='sw-rand-planet-list__item'>
+                  Population: 
+                  <span>{population}</span>
+                </li>
+                <li className='sw-rand-planet-list__item'>
+                  RotationPeriod:
+                  <span>{rotationPeriod}</span>
+                </li>
+                <li className='sw-rand-planet-list__item'>
+                  Diameter: 
+                  <span>{diameter}</span>
+                </li>
+              </ul>
+          </div>
+        </React.Fragment>
+      )
+    };
+
+    const loader = loading ? showLoad() : null;
+    const errorMessage = error ? showError() : null;
+    const content = !(loading || error) ? showContent() : null;
   
     return(
       <div className='sw-rand-planet'>
         <div className='sw-rand-planet__container'>
           <div className='sw-rand-planet__wrap'>
-          <div className='sw-rand-planet__content'>
-              <img className='sw-rand-planet__img' src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt=""/>
-              <div className='sw-rand-planet__info'>
-                <h3 className='sw-rand-planet__title'>{name}</h3>
-                  <ul className='sw-rand-planet-list'>
-                    <li className='sw-rand-planet-list__item'>
-                      Population: 
-                      <span>{population}</span>
-                    </li>
-                    <li className='sw-rand-planet-list__item'>
-                      RotationPeriod:
-                      <span>{rotationPeriod}</span>
-                    </li>
-                    <li className='sw-rand-planet-list__item'>
-                      Diameter: 
-                      <span>{diameter}</span>
-                    </li>
-                  </ul>
-              </div>
+            <div className='sw-rand-planet__content'>
+              { loader }
+              { errorMessage }
+              { content }
             </div>
           </div>
         </div>
