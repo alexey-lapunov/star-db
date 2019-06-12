@@ -1,0 +1,59 @@
+@import '../App/variables';
+
+.sw-rand-planet {
+  position: relative;
+  height: 244px;
+
+  background-color: $color-fill;
+  border-radius: 25px;
+  border: 2px solid rgba($color-base, .1);
+
+  &__container {
+    height: 100%;
+    padding: 0 20px;
+  }
+
+  &__wrap {
+    height: 100%;
+    padding: 20px 0;
+  }
+
+  &__content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__img {
+    max-width: 200px;
+    max-height: 200px
+  }
+
+  &__info {
+    width: 100%;
+    margin: 0 0 0 30px;
+  }
+
+  &__title {
+    font-size: 25px;
+    margin: 0 0 20px 0;
+  }
+
+  &-list {
+    padding: 0 0 0 20px;
+
+    &__item {
+      line-height: 30px;
+      border-bottom: 1px solid rgba($color-base, .2);
+
+      &:not(:last-of-type) {
+        margin: 0 0 15px 0;
+      }
+
+      span {
+        font-weight: 700;
+        margin: 0 0 0 15px;
+      }
+    }
+  }
+}

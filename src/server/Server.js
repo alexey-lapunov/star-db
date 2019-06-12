@@ -14,21 +14,24 @@ export default class Server {
   async getAllPersons() {
     const res = await this.getResourse('/people');
 
-    return res.results;
+    return res.results.map( (item) => { return this._transformPerson(item)} );
   }
 
-  getPerson(id) {
-    return this.getResourse(`/people/${id}`);
+  async getPerson(id) {
+    const res = await this.getResourse(`/people/${id}`);
+    return this._transformPerson(res);
   }
 
   async getAllPlanets() {
     const res = await this.getResourse('/planets/');
 
-    return res.results;
+    return res.results.map( (item) => { return this._transformPlanet(item) });
   }
 
-  getPlanet(id) {
-    return this.getResourse(`/planets/${id}`);
+  async getPlanet(id) {
+    const res = await this.getResourse(`/planets/${id}`);
+
+    return this._transformPlanet(res);
   }
 
   async getAllStarships() {
@@ -40,4 +43,34 @@ export default class Server {
   getStarships(id) {
     return this.getResourse(`/starships/${id}`);
   }
+
+  _regExp(obj) {
+    const idRegExp = /\/([0-9]*)\/$/;
+    return obj.url.match(idRegExp)[1];
+  }
+
+  _transformPerson(person) {
+    return{
+        id: this._regExp(person),
+        name: person.name,
+        skinColor: person.skin_color,
+        birthYear: person.birth_year,
+        gender: person.gender,
+      }
+  }
+
+  _transformPlanet(planet) {
+    return {
+        id: this._regExp(planet),
+        name: planet.name,
+        population: planet.population,
+        rotationPeriod: planet.rotation_period,
+        diameter: planet.diameter,
+      }
+  }
 }       
+// const server = new Server();
+
+// server.getPerson(2).then((res) => {
+//   console.log(res)
+// })
