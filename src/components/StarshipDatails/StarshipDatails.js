@@ -8,7 +8,7 @@ export default class StarshipDatails extends React.Component {
       <div className='sw-starship-details'>
         <div className='sw-starship-details__container'>
           <div className='sw-starship-details__wrap'>
-            <img className='sw-starship-details__img' src="" alt=""/>
+            <img className='sw-starship-details__img' src='' alt=""/>
             <div className='sw-starship-details__info'>
               <h3 className='sw-starship-details__title'>starship Name</h3>
                 <div className='sw-starship-details__list'>

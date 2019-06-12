@@ -1,0 +1,29 @@
+@import '../App/variables';
+
+.sw-item-list {
+  position: relative;
+  width: 500px;
+  min-height: 300px;
+  padding: 20px 0;
+
+  background-color: $color-fill;
+  border-radius: 25px;
+  border: 2px solid rgba($color-base, .1);
+
+  &__item {
+    padding: 5px 30px;
+    border-bottom: 1px solid rgba($color-base, .2);
+
+    font-size: 20px;
+    cursor: pointer;
+
+    &:not(:last-of-type) {
+      margin: 0 0 10px 0;
+    }
+
+    &.-active {
+      font-weight: 700;
+      color:$color-secondary;
+    }
+  }
+}

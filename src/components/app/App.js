@@ -11,17 +11,29 @@ import StarshipDatails from './../StarshipDatails';
 import './style.scss';
 
 export default class App extends React.Component {
+  state = {
+    idActiveItemList: null,
+  }
+
+  onActiveItemList = (id) => {
+    this.setState({
+      idActiveItemList: id
+    })
+  }
+
   render() {
+    const {idActiveItemList} = this.state; 
+
     return(
       <div className='sw-content'>
         <Header/>
-        <RandomPlanet/>
-        <ItemList/>
-        <PersonDatails/>
+        <RandomPlanet/> 
+        <div style={{display: 'flex', alignItems: 'flex-start'}}>
+          <ItemList idActiveItem={idActiveItemList} onActiveItemList={this.onActiveItemList}/>
+          <PersonDatails idActivePerson={idActiveItemList}/>
+        </div>
         <PlanetDatails/>
         <StarshipDatails/>
-
-        
       </div>
     )
   }

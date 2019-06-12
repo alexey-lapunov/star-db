@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Server from './../../server/';
 import ErrorMessage from './../ErroMessage/';
+import Loader from './../Loader/';
 
 import './style.scss';
 
@@ -11,14 +13,18 @@ export default class RandomPlanet extends React.Component {
     error: false
   }
 
-  constructor() {
-    super();
+  componentDidMount() {
     this.updatePlanet();
+    this.interva = setInterval(this.updatePlanet, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interva.clear());
   }
 
   server = new Server();
 
-  updatePlanet() {
+  updatePlanet = () => {
     const id = Math.floor(Math.random() * 17 + 2);
 
     this.server
@@ -52,14 +58,6 @@ export default class RandomPlanet extends React.Component {
       error
     } = this.state;
 
-    const showLoad = () => {
-      return(
-        <div className='sw-rand-planet__loader'>
-          <div className='sw-rand-planet__spiner'></div>
-        </div>
-      )
-    };
-
     const showError = () => {
       return(
         <ErrorMessage/>
@@ -91,7 +89,7 @@ export default class RandomPlanet extends React.Component {
       )
     };
 
-    const loader = loading ? showLoad() : null;
+    const loader = loading ? <Loader/> : null;
     const errorMessage = error ? showError() : null;
     const content = !(loading || error) ? showContent() : null;
   

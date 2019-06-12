@@ -1,0 +1,51 @@
+@import '../App/variables';
+
+.sw-person-details {
+  position: relative;
+  min-width: 482px;
+  min-height: 300px;
+
+  background-color: $color-fill;
+  border-radius: 25px;
+  border: 2px solid rgba($color-base, .1);
+
+  &__container {
+    padding: 0 40px;
+  }
+
+  &__wrap {
+    padding: 20px 0;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__img {
+    max-height: 300px;
+  }
+
+  &__title {
+    font-size: 24px;
+    margin: 0 0 20px 0;
+  }
+
+  &__info {
+    padding: 0 0 0 30px;
+  }
+
+  &-list {
+    &__item {
+      padding: 7px 0;
+
+      border-bottom: 1px solid rgba($color-base, .3);
+
+      span {
+        font-weight: 700;
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+
+}

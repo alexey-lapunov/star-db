@@ -56,40 +56,4 @@
       }
     }
   }
-
-  &__loader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-  }
-
-  &__spiner {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-
-    display: inline-block;
-
-  	width: 40px;
-    height: 40px;
-    margin: 0 0 0 -20px;
-    
-		background: $color-base;
-		border-radius: 100px;
-		border: 8px solid $color-fill;
-		border-top-color: $color-secondary;
-    border-bottom-color: $color-secondary;
-    
-    animation: spin 1s infinite linear; -moz-animation: spin 1s infinite linear; -o-animation: spin 1s infinite linear; animation: spin 1s infinite linear; 
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg); 
-      }
-      100% { 
-        transform: rotate(359deg); 
-      } 
-    }
-  }
 }
