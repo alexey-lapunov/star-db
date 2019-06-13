@@ -14,8 +14,7 @@ export default class ItemList extends React.Component {
   server = new Server();
 
   componentDidMount() {
-    this.server
-      .getAllPersons()
+    this.props.getData()
       .then((res) => {
         this.setState({
           loading: false,
@@ -32,12 +31,13 @@ export default class ItemList extends React.Component {
 
     const className = 'sw-item-list__item';
 
-    return list.map((item, i) => {
-      return <li key={item.id} 
-        onClick={() => {this.props.onActiveItemList(item.id)}}
-        className={
-          item.id === this.props.idActiveItem ? className + ' -active': className
-        }>{item.name}</li>
+    return list.map((item) => {
+      return <li
+                key={item.id} 
+                onClick={() => {this.props.onActiveItemList(item.id)}}
+                className={
+                  item.id === this.props.idActiveItem ? className + ' -active': className}
+                >{this.props.renderFunc(item)}</li>
     })
   }
 
