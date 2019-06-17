@@ -37,7 +37,7 @@ export default class ItemList extends React.Component {
                 onClick={() => {this.props.onActiveItemList(item.id)}}
                 className={
                   item.id === this.props.idActiveItem ? className + ' -active': className}
-                >{this.props.renderFunc(item)}</li>
+                >{this.props.children(item)}</li>
     })
   }
 

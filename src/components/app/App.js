@@ -3,11 +3,8 @@ import React from 'react';
 import Server from './../../server/'
 
 import Header from './../Header';
-import RandomPlanet from './../RandomPlanet';
 import ItemList from './../ItemList';
-import PersonDatails from './../PersonDatails';
-import PlanetDatails from './../PlanetDatails';
-import StarshipDatails from './../StarshipDatails';
+import ItemDatails, {RecordItem} from '../ItemsDatails';
 import Row from './../Row';
 
 import './style.scss';
@@ -33,39 +30,39 @@ export default class App extends React.Component {
       <ItemList 
         idActiveItem={idActiveItemList} 
         onActiveItemList={this.onActiveItemList}
-        getData={this.server.getAllPersons}
-        renderFunc={ (item) => `${item.name} (${item.birthYear})`}/>
+        getData={this.server.getAllPersons}>
+          { (item) => `${item.name} (${item.birthYear})` }
+        </ItemList>
     );
 
     const personDatails = (
-      <PersonDatails 
-        idActivePerson={idActiveItemList}
-        renderFunc={ (item) => `${item.name} (${item})` }/>
+      <ItemDatails 
+        getData={this.server.getPerson}
+        idActiveItem={13}>
+          <RecordItem label='Year' field='birthYear'/>
+          <RecordItem label='Color' field='skinColor'/>
+          <RecordItem label='Gender' field='gender'/>
+        </ItemDatails>
     );
 
     // Starships components 
-    const starshipsItemList = (
-      <ItemList 
-        //idActiveItem={} 
-        onActiveItemList={this.onActiveItemList}
-        getData={this.server.getAllStarships}
-        renderFunc={ (item) => `${item.name} ()`}/>
-    );
+    const starshipsDeteils = (
+      <ItemDatails 
+        getData={this.server.getStarships}
+        idActiveItem={12}>
+          <RecordItem label='Class' field='class'/>
+          <RecordItem label='Speed' field='speed'/>
+          <RecordItem label='Model' field='model'/>
+        </ItemDatails>
+    )
 
     return(
       <div className='sw-content'>
         <Header/>
-        <RandomPlanet/>
         <Row
-          left={ personItemList }
-          right={ personDatails }
+          left={ personDatails }
+          right={ starshipsDeteils }
         />
-        <Row
-          left={ starshipsItemList }
-          right={ <PersonDatails /> }
-        />
-        <PlanetDatails/>
-        <StarshipDatails/>
       </div>
     )
   }

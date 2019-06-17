@@ -53,32 +53,41 @@ export default class Server {
   }
 
   _transformStarships(starships) {
+    const id = this._regExp(starships);
+
     return {
       id: this._regExp(starships),
       name: starships.name,
       class: starships.starship_class,
       speed: starships.max_atmosphering_speed,
       model: starships.model,
+      img: `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`,
     }
   }
 
   _transformPerson(person) {
+    const id = this._regExp(person);
+
     return{
-        id: this._regExp(person),
+        id: id,
         name: person.name,
         skinColor: person.skin_color,
         birthYear: person.birth_year,
         gender: person.gender,
+        img: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`,
       }
   }
 
   _transformPlanet(planet) {
+    const id = this._regExp(planet);
+
     return {
         id: this._regExp(planet),
         name: planet.name,
         population: planet.population,
         rotationPeriod: planet.rotation_period,
         diameter: planet.diameter,
+        img: `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`,
       }
   }
 }       

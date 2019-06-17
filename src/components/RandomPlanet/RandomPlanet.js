@@ -47,12 +47,12 @@ export default class RandomPlanet extends React.Component {
   }
 
   render() {
-    const { planet: {
-      id, 
+    const { planet: { 
       name, 
       population, 
       rotationPeriod, 
-      diameter
+      diameter,
+      img
     }, 
       loading,
       error
@@ -67,7 +67,7 @@ export default class RandomPlanet extends React.Component {
     const showContent = () => {
       return(
         <React.Fragment>
-          <img className='sw-rand-planet__img' src={`https://starwars-visualguide.com/assets/img/planets/${id}.jpg`} alt=""/>
+          <img className='sw-rand-planet__img' src={img} alt=""/>
           <div className='sw-rand-planet__info'>
             <h3 className='sw-rand-planet__title'>{name}</h3>
               <ul className='sw-rand-planet-list'>

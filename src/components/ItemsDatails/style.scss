@@ -1,6 +1,6 @@
 @import '../App/variables';
 
-.sw-person-details {
+.sw-item-details {
   position: relative;
   min-width: 482px;
   min-height: 300px;
@@ -23,7 +23,8 @@
   }
 
   &__img {
-    max-height: 300px;
+    max-width: 200px;
+    max-height: 300px;  
   }
 
   &__title {
