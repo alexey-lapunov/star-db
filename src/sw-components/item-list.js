@@ -1,6 +1,6 @@
-import React from 'react';
 import ItemList from './../components/ItemList';
-import Server from './../server'
+import Server from './../server';
+import {withData} from './../components/hoc/';
 
 const server = new Server();
 
@@ -10,29 +10,9 @@ const {
   getAllStarships
 } = server;
 
-const PersonList = () => {
-  return(
-    <ItemList getData={getAllPersons}>
-      { (item) => `${item.name} (${item.birthYear})` }
-    </ItemList>
-  )
-}
-
-const PlanetList = () => {
-  return(
-    <ItemList getData={getAllPlanets}>
-      { (item) => `${item.name} (${item.population})` }
-    </ItemList>
-  )
-}
-
-const StarshipsList = () => {
-  return(
-    <ItemList getData={getAllStarships}>
-      { (item) => `${item.name} (${item.speed})` }
-    </ItemList>
-  )
-}
+const PersonList = withData(ItemList, getAllPersons);
+const PlanetList = withData(ItemList, getAllPlanets);
+const StarshipsList = withData(ItemList, getAllStarships);
 
 export {
   PersonList,

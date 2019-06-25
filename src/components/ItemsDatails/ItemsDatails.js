@@ -20,7 +20,6 @@ export default class PersonDatails extends React.Component {
     loading: true,
   }
 
-
   componentDidMount() {
     this.updatePerson();
   }

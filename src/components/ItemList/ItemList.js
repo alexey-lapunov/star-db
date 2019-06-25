@@ -1,7 +1,5 @@
 import React from 'react';
 
-import {withData} from './../hoc/';
-
 import './style.scss';
 
 const ItemList = (props) => {
@@ -11,7 +9,7 @@ const ItemList = (props) => {
     return <li
               key={item.id}
               className='sw-item-list__item'>
-                {children(item)}
+                {children(item)} 
             </li>
   })
 
@@ -25,4 +23,4 @@ const ItemList = (props) => {
   )
 }
 
-export default withData(ItemList)
+export default ItemList;

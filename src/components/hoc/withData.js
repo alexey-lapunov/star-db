@@ -3,7 +3,7 @@ import Loader from '../Loader';
 
 import Server from './../../server';
 
-export default function withData(Component) {
+export default function withData(Component, getData) {
   class WithData extends React.Component {
     state = {
       list: null,
@@ -13,7 +13,7 @@ export default function withData(Component) {
     server = new Server();
 
     componentDidMount() {
-      this.props.getData()
+      getData()
         .then((res) => {
           this.setState({
             loading: false,
@@ -28,7 +28,7 @@ export default function withData(Component) {
       const items = !loading ? list : []; 
 
       return(
-        <Component loader={loader} items={items} {...this.props}/>
+        <Component getData={getData} loader={loader} items={items} {...this.props}/>
       ) 
     }
   }

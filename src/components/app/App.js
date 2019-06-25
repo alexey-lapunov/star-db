@@ -8,8 +8,8 @@ import {
   StarhipsDatails,
   PlanetDatails,
   PersonList,
-  StarshipsList,
-  PlanetList
+  PlanetList,
+  StarshipsList
 } from './../../sw-components';
 
 import './style.scss';
@@ -28,17 +28,21 @@ export default class App extends React.Component {
   }
 
   render() {
-    const { idActiveItemList } = this.state;
-
     return(
       <div className='sw-content'>
         <Header/>
         <StarhipsDatails idActiveItem={12}/>
         <PersonDatails idActiveItem={9}/>
         <PlanetDatails idActiveItem={8}/>
-        <PersonList/>
-        <PlanetList/>
-        <StarshipsList/>
+        <PersonList>
+          { (item) => `${item.name} (${item.birthYear})` }
+        </PersonList>
+        <PlanetList>
+          { (item) => `${item.name} (${item.population})` }
+        </PlanetList>
+        <StarshipsList>
+          { (item) => `${item.name} (${item.speed})` }
+        </StarshipsList>
       </div>
     )
   }
