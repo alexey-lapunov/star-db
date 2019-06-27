@@ -1,58 +1,26 @@
 import React from 'react';
 
-import Server from './../../server';
-import Loader from '../Loader';
-
 import './style.scss';
 
-export default class ItemList extends React.Component {
-  state = {
-    list: null,
-    loading: true,
-  };
+const ItemList = (props) => {
+  const {loader, items, children} = props;
+  
+  const itemsRender = items.map((item) => {
+    return <li
+              key={item.id}
+              className='sw-item-list__item'>
+                {children(item)} 
+            </li>
+  })
 
-  server = new Server();
-
-  componentDidMount() {
-    this.server
-      .getAllPersons()
-      .then((res) => {
-        this.setState({
-          loading: false,
-          list: res,
-          idActiveItem: res[0].id
-        })
-      })
-  }
-
-  renderItems(list) {
-    if( !list ) {
-      return
-    }
-
-    const className = 'sw-item-list__item';
-
-    return list.map((item, i) => {
-      return <li key={item.id} 
-        onClick={() => {this.props.onActiveItemList(item.id)}}
-        className={
-          item.id === this.props.idActiveItem ? className + ' -active': className
-        }>{item.name}</li>
-    })
-  }
-
-  render() {
-    const { list, loading } = this.state;
-    const loader = loading ? <Loader/> : null;
-    const items = !loading ? this.renderItems(list) : null;
-
-    return(
-      <div className='sw-item-list'>
-        <ul className='sw-item-list__list'>
-          {loader}
-          {items}
-        </ul>
-      </div>
-    )
-  }
+  return(
+    <div className='sw-item-list'>
+      <ul className='sw-item-list__list'>
+        {loader}
+        {itemsRender}
+      </ul>
+    </div>
+  )
 }
+
+export default ItemList;

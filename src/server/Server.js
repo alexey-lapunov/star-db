@@ -1,3 +1,4 @@
+
 export default class Server {
   async getResourse(url) {
     const body = await fetch(`https://swapi.co/api${url}`);
@@ -11,37 +12,39 @@ export default class Server {
     return res;
   }
 
-  async getAllPersons() {
+  getAllPersons = async () => {
     const res = await this.getResourse('/people');
 
     return res.results.map( (item) => { return this._transformPerson(item)} );
   }
 
-  async getPerson(id) {
+  getPerson = async (id) => {
     const res = await this.getResourse(`/people/${id}`);
     return this._transformPerson(res);
   }
 
-  async getAllPlanets() {
-    const res = await this.getResourse('/planets/');
+  getAllPlanets = async () => {
+    const res = await this.getResourse('/planets/');  
 
     return res.results.map( (item) => { return this._transformPlanet(item) });
   }
 
-  async getPlanet(id) {
+  getPlanet = async (id) => {
     const res = await this.getResourse(`/planets/${id}`);
 
     return this._transformPlanet(res);
   }
 
-  async getAllStarships() {
+  getAllStarships = async () => {
     const res = await this.getResourse('/starships/');
 
-    return res.results;
+    return res.results.map( (item) => this._transformStarships(item) );
   }
 
-  getStarships(id) {
-    return this.getResourse(`/starships/${id}`);
+   getStarships = async (id) => {
+    const res = await this.getResourse(`/starships/${id}`);
+
+    return this._transformStarships(res)
   }
 
   _regExp(obj) {
@@ -49,28 +52,42 @@ export default class Server {
     return obj.url.match(idRegExp)[1];
   }
 
+  _transformStarships(starships) {
+    const id = this._regExp(starships);
+
+    return {
+      id: this._regExp(starships),
+      name: starships.name,
+      class: starships.starship_class,
+      speed: starships.max_atmosphering_speed,
+      model: starships.model,
+      img: `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`,
+    }
+  }
+
   _transformPerson(person) {
+    const id = this._regExp(person);
+
     return{
-        id: this._regExp(person),
+        id: id,
         name: person.name,
         skinColor: person.skin_color,
         birthYear: person.birth_year,
         gender: person.gender,
+        img: `https://starwars-visualguide.com/assets/img/characters/${id}.jpg`,
       }
   }
 
   _transformPlanet(planet) {
+    const id = this._regExp(planet);
+
     return {
         id: this._regExp(planet),
         name: planet.name,
         population: planet.population,
         rotationPeriod: planet.rotation_period,
         diameter: planet.diameter,
+        img: `https://starwars-visualguide.com/assets/img/planets/${id}.jpg`,
       }
   }
 }       
-// const server = new Server();
-
-// server.getPerson(2).then((res) => {
-//   console.log(res)
-// })

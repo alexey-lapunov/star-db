@@ -1,6 +1,9 @@
 @import '../App/variables';
 
-.sw-person-details {
+.sw-item-details {
+  display: flex;
+  align-items: center;
+
   position: relative;
   min-width: 482px;
   min-height: 300px;
@@ -10,6 +13,7 @@
   border: 2px solid rgba($color-base, .1);
 
   &__container {
+    width: 100%;
     padding: 0 40px;
   }
 
@@ -23,7 +27,8 @@
   }
 
   &__img {
-    max-height: 300px;
+    max-width: 200px;
+    max-height: 300px;  
   }
 
   &__title {
@@ -32,6 +37,7 @@
   }
 
   &__info {
+    width: 100%; 
     padding: 0 0 0 30px;
   }
 

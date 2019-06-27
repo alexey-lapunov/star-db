@@ -1,18 +1,24 @@
 import React from 'react';
 
-import Header from './../Header';
-import RandomPlanet from './../RandomPlanet';
-import ItemList from './../ItemList';
-import PersonDatails from './../PersonDatails';
-import PlanetDatails from './../PlanetDatails';
-import StarshipDatails from './../StarshipDatails';
+import Server from './../../server/'
 
+import Header from './../Header';
+import {
+  PersonDatails,
+  StarhipsDatails,
+  PlanetDatails,
+  PersonList,
+  PlanetList,
+  StarshipsList
+} from './../../sw-components';
 
 import './style.scss';
 
 export default class App extends React.Component {
+  server = new Server();
+
   state = {
-    idActiveItemList: null,
+    idActiveItemList: null
   }
 
   onActiveItemList = (id) => {
@@ -22,18 +28,21 @@ export default class App extends React.Component {
   }
 
   render() {
-    const {idActiveItemList} = this.state; 
-
     return(
       <div className='sw-content'>
         <Header/>
-        <RandomPlanet/> 
-        <div style={{display: 'flex', alignItems: 'flex-start'}}>
-          <ItemList idActiveItem={idActiveItemList} onActiveItemList={this.onActiveItemList}/>
-          <PersonDatails idActivePerson={idActiveItemList}/>
-        </div>
-        <PlanetDatails/>
-        <StarshipDatails/>
+        <StarhipsDatails idActiveItem={12}/>
+        <PersonDatails idActiveItem={9}/>
+        <PlanetDatails idActiveItem={8}/>
+        <PersonList>
+          { (item) => `${item.name} (${item.birthYear})` }
+        </PersonList>
+        <PlanetList>
+          { (item) => `${item.name} (${item.population})` }
+        </PlanetList>
+        <StarshipsList>
+          { (item) => `${item.name} (${item.speed})` }
+        </StarshipsList>
       </div>
     )
   }
