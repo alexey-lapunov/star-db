@@ -1,4 +1,6 @@
 import React from 'react';
+import Loader from '../Loader';
+import ErroMessage from '../ErroMessage';
 
 import './style.scss';
 
@@ -18,6 +20,7 @@ export default class PersonDatails extends React.Component {
   state = {
     data: {},
     loading: true,
+    error: false,
   }
 
   componentDidMount() {
@@ -44,10 +47,15 @@ export default class PersonDatails extends React.Component {
           loading: false
         })
       })
+      .catch(error => {
+        this.setState({
+            error: true,
+        })
+      })
   }
 
   render() {
-    const { data: { name, img}, loading, data} = this.state;
+    const { data: { name, img}, loading, data, error} = this.state;
     const { idActiveItem } = this.props;
 
     const showMessage = () => {
@@ -74,13 +82,17 @@ export default class PersonDatails extends React.Component {
       ) 
     }
 
-    const message = !idActiveItem ? showMessage() : null;
-    const content = idActiveItem && !loading ? showContent() : null;
+    const message = !idActiveItem && !error ? showMessage() : null;
+    const content = idActiveItem && !loading && !error ? showContent() : null;
+    const loader = loading && !error ? <Loader/> : null;
+    const errorMessage = error ? <ErroMessage/> : null;
     
     return(
       <div className='sw-item-details'>
         <div className='sw-item-details__container'>
           <div className='sw-item-details__wrap'>
+            {errorMessage}
+            {loader}
             {message}
             {content}
           </div>

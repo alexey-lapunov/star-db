@@ -3,7 +3,7 @@ import React from 'react';
 import './style.scss';
 
 const ItemList = (props) => {
-  const {loader, items, children} = props;
+  const {loader, error, items, children} = props;
   
   const itemsRender = items.map((item) => {
     return <li
@@ -17,6 +17,7 @@ const ItemList = (props) => {
     <div className='sw-item-list'>
       <ul className='sw-item-list__list'>
         {loader}
+        {error}
         {itemsRender}
       </ul>
     </div>

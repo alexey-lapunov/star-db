@@ -33,16 +33,11 @@ export default class App extends React.Component {
         <Header/>
         <StarhipsDatails idActiveItem={12}/>
         <PersonDatails idActiveItem={9}/>
-        <PlanetDatails idActiveItem={8}/>
-        <PersonList>
-          { (item) => `${item.name} (${item.birthYear})` }
-        </PersonList>
-        <PlanetList>
-          { (item) => `${item.name} (${item.population})` }
-        </PlanetList>
-        <StarshipsList>
-          { (item) => `${item.name} (${item.speed})` }
-        </StarshipsList>
+        <PlanetDatails idActiveItem={8}/> 
+        <PersonList/>
+        <PlanetList/>
+        <StarshipsList/>
+
       </div>
     )
   }

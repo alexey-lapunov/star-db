@@ -1,5 +1,6 @@
 import React from 'react';
 import Loader from '../Loader';
+import ErroMessage from '../ErroMessage';
 
 import Server from './../../server';
 
@@ -8,6 +9,7 @@ export default function withData(Component, getData) {
     state = {
       list: null,
       loading: true,
+      error: false,
     };
 
     server = new Server();
@@ -20,15 +22,26 @@ export default function withData(Component, getData) {
             list: res,
           })
         })
+        .catch( () => {
+            this.setState({
+                error: true
+            })
+        });
     }
 
     render() {
-      const { list, loading } = this.state;
-      const loader = loading ? <Loader/> : null;
-      const items = !loading ? list : []; 
+      const { list, loading, error } = this.state;
+      const loader = loading && !error ? <Loader/> : null;
+      const errorMessage = error ? <ErroMessage/> : null;
+      const items = !loading && !error ? list : [];
 
       return(
-        <Component getData={getData} loader={loader} items={items} {...this.props}/>
+        <Component 
+            getData={getData} 
+            loader={loader} 
+            error={errorMessage}
+            items={items} 
+            {...this.props}/>
       ) 
     }
   }
