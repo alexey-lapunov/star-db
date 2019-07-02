@@ -2,8 +2,6 @@ import React from 'react';
 import Loader from '../Loader';
 import ErroMessage from '../ErroMessage';
 
-import Server from './../../server';
-
 export default function withData(Component, getData) {
   class WithData extends React.Component {
     state = {
@@ -11,8 +9,6 @@ export default function withData(Component, getData) {
       loading: true,
       error: false,
     };
-
-    server = new Server();
 
     componentDidMount() {
       getData()

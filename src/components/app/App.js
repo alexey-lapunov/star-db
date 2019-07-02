@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Server from './../../server/'
-
 import Header from './../Header';
 import RandomPlanet from './../RandomPlanet'
 import {
@@ -13,8 +11,6 @@ import {
 import './style.scss';
 
 export default class App extends React.Component {
-  server = new Server();
-
   render() {
     return(
       <div className='sw-content'>
