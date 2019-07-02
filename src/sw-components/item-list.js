@@ -26,7 +26,7 @@ const renderFuncPlanet = (item) => `${item.name} (${item.population})`;
 const renderFuncStarships = (item) => `${item.name} (${item.speed})`;
 
 const PersonList = withData(
-                        withChildrenFunction(ItemList, renderFuncPerson), 
+                        withChildrenFunction(ItemList, renderFuncPerson),
                         getAllPersons);
 const PlanetList = withData(
                         withChildrenFunction(ItemList, renderFuncPlanet),

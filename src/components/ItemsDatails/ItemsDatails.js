@@ -16,7 +16,7 @@ export {
   RecordItem
 }
 
-export default class PersonDatails extends React.Component {
+export default class ItemDatails extends React.Component {
   state = {
     data: {},
     loading: true,
@@ -84,7 +84,7 @@ export default class PersonDatails extends React.Component {
 
     const message = !idActiveItem && !error ? showMessage() : null;
     const content = idActiveItem && !loading && !error ? showContent() : null;
-    const loader = loading && !error ? <Loader/> : null;
+    const loader = loading && !error && idActiveItem ? <Loader/> : null;
     const errorMessage = error ? <ErroMessage/> : null;
     
     return(

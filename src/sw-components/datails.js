@@ -39,7 +39,7 @@ const PlanetDatails = ({idActiveItem}) => {
   return(
     <ItemDatails 
       getData={getPlanet}
-      idActiveItem={9}>
+      idActiveItem={idActiveItem}>
         <RecordItem label='Name' field='name'/>
         <RecordItem label='Population' field='population'/>
         <RecordItem label='Diameter' field='diameter'/>
