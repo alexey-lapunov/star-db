@@ -15,7 +15,7 @@ export default class App extends React.Component {
     return(
       <div className='sw-content'>
         <Header/>
-        <RandomPlanet/>
+        <RandomPlanet setInterval={3000}/>
         <PersonPage/>
         <PlanetPage/>
         <StarshipsPage/>

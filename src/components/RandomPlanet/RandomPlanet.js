@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Server from './../../server/';
 import ErrorMessage from './../ErroMessage/';
@@ -13,9 +14,13 @@ export default class RandomPlanet extends React.Component {
     error: false
   }
 
+  static propTypes = {
+    setInterval: PropTypes.number
+  }
+
   componentDidMount() {
     this.updatePlanet();
-    this.interva = setInterval(this.updatePlanet, 5000);
+    this.interva = setInterval(this.updatePlanet, this.props.setInterval);
   }
 
   componentWillUnmount() {
