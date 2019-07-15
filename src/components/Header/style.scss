@@ -43,6 +43,10 @@
       &:hover {
         color: rgba($color-base, .5);
       }
+
+      &.-active {
+        color:red;
+      }
     }
   }
 }

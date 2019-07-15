@@ -16,7 +16,6 @@ const ItemList = (props) => {
   })
 
   return(
-
     <div className='sw-item-list'>
       <ul className='sw-item-list__list'>
         {loader}

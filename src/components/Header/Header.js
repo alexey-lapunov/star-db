@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom'
 
 import './style.scss';
 
@@ -10,18 +11,27 @@ export default class Header extends React.Component {
           <div className='sw-header__wrap'>
             <div className='sw-header-grid'>
               <div className='sw-header-grid__col -left'>
-                <span className='sw-header__logo'>Star DB</span>
+                
               </div>
               <div className='sw-header-grid__col -right'>
                 <ul className='sw-header-nav'>
                   <li className='sw-header-nav__item'>
-                    <a href="vk.com" className='sw-header-nav__link'>People</a>  
+                    <NavLink to='/people'
+                             className='sw-header-nav__link'
+                             activeClassName='-active'
+                    >People</NavLink>
                   </li>  
                   <li className='sw-header-nav__item'>
-                    <a href="vk.com" className='sw-header-nav__link'>Planets</a>
+                    <NavLink to='/planet'
+                             className='sw-header-nav__link'
+                             activeClassName='-active'
+                    >Planets</NavLink>
                   </li>  
                   <li className='sw-header-nav__item'>
-                    <a href="vk.com" className='sw-header-nav__link'>Starships</a>
+                    <NavLink to='/starships'
+                             className='sw-header-nav__link'
+                             activeClassName='-active'
+                    >Starships</NavLink>
                   </li>              
                 </ul>
               </div>
